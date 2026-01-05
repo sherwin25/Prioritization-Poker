@@ -53,7 +53,7 @@ export default function Home() {
 
         <div className="grid md:grid-cols-2 gap-6">
           {/* Create Room Card */}
-          <div className="glass-panel p-8 rounded-3xl flex flex-col justify-between group hover:border-indigo-500/30 transition-colors">
+          <div className="bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl p-8 rounded-3xl flex flex-col justify-between group hover:border-indigo-500/30 transition-colors">
             <div className="space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-indigo-300 group-hover:bg-indigo-500 group-hover:text-white transition-colors">
                 <Play className="w-6 h-6 fill-current" />
@@ -75,7 +75,7 @@ export default function Home() {
           </div>
 
           {/* Join Room Card */}
-          <div className="glass-panel p-8 rounded-3xl flex flex-col justify-between hover:border-pink-500/30 transition-colors">
+          <div className="bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl p-8 rounded-3xl flex flex-col justify-between hover:border-pink-500/30 transition-colors">
              <div className="space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-pink-500/20 flex items-center justify-center text-pink-300">
                 <Users className="w-6 h-6" />

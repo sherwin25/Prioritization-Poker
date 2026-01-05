@@ -2,20 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .glass-panel {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl;
-  }
-  
-  .glass-card {
-    @apply bg-white/20 backdrop-blur-sm border border-white/30 shadow-lg hover:bg-white/30 transition-all duration-300;
-  }
-
-  .text-glow {
-    text-shadow: 0 0 20px rgba(255,255,255,0.5);
-  }
-}
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

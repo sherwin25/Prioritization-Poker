@@ -48,7 +48,7 @@ export default function RoomPage() {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           onSubmit={handleJoin} 
-          className="glass-panel p-8 rounded-3xl max-w-sm w-full space-y-6 text-center"
+          className="bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl p-8 rounded-3xl max-w-sm w-full space-y-6 text-center"
         >
           <div className="space-y-2">
             <h2 className="text-3xl font-bold text-white">Join Room</h2>
@@ -143,7 +143,7 @@ export default function RoomPage() {
                  
                  {/* Avatar Label */}
                  <div className="flex flex-col items-center gap-1">
-                   <div className="glass-panel px-4 py-1.5 rounded-full text-sm font-semibold text-white flex items-center gap-2 border border-white/10 group-hover:border-white/30 transition-colors">
+                   <div className="bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl px-4 py-1.5 rounded-full text-sm font-semibold text-white flex items-center gap-2 border border-white/10 group-hover:border-white/30 transition-colors">
                      {p.vote && !gameState.isRevealed && (
                        <span className="relative flex h-2 w-2">
                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -160,7 +160,7 @@ export default function RoomPage() {
       </div>
 
       {/* Hand Area */}
-      <div className="glass-panel mx-4 mb-4 md:mx-auto md:mb-8 md:max-w-4xl rounded-3xl p-4 md:p-6 flex justify-center gap-3 md:gap-4 overflow-x-auto pb-safe z-20">
+      <div className="bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl mx-4 mb-4 md:mx-auto md:mb-8 md:max-w-4xl rounded-3xl p-4 md:p-6 flex justify-center gap-3 md:gap-4 overflow-x-auto pb-safe z-20">
         {CARDS.map((card) => (
           <button
             key={card}
