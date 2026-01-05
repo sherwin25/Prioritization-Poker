@@ -8,8 +8,11 @@ import confetti from "canvas-confetti";
 
 const CARDS = [1, 2, 3, 5, 8, 13, 21, "?", "☕"];
 
-export default function RoomPage({ params }: { params: { code: string } }) {
-  const code = params.code.toUpperCase();
+import { useParams } from "next/navigation";
+
+export default function RoomPage() {
+  const params = useParams();
+  const code = (params?.code as string)?.toUpperCase();
   const [name, setName] = useState("");
   const [hasJoined, setHasJoined] = useState(false);
   
