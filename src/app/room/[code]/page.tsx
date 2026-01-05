@@ -6,7 +6,7 @@ import { usePokerRoom } from "@/hooks/use-poker";
 import { cn } from "@/utils/cn";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
-import { Copy, RefreshCw, Eye, Check } from "lucide-react";
+import { Copy, RefreshCw, Eye, Check, Users } from "lucide-react";
 
 const CARDS = [1, 2, 3, 5, 8, 13, 21, "?", "☕"];
 
