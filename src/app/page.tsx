@@ -87,10 +87,10 @@ export default function Home() {
             <form onSubmit={joinRoom} className="mt-8 space-y-4">
               <input
                 type="text"
-                placeholder="XK9Z"
+                placeholder="Enter Code"
                 value={roomCode}
                 onChange={(e) => setRoomCode(e.target.value)}
-                className="w-full px-4 py-3.5 rounded-lg bg-background border border-input text-center text-xl font-mono uppercase tracking-widest focus:ring-2 focus:ring-ring focus:border-transparent outline-none text-foreground placeholder:text-muted-foreground/30 transition-all font-bold"
+                className="w-full px-4 py-3.5 rounded-lg bg-background border border-input text-center text-xl font-mono uppercase tracking-widest focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none text-foreground placeholder:text-muted-foreground/30 transition-all font-bold placeholder:normal-case placeholder:tracking-normal placeholder:font-sans"
                 maxLength={6}
               />
               <button
