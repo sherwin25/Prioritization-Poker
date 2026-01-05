@@ -1,65 +1,84 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { cn } from "@/utils/cn";
+import { motion } from "framer-motion";
 
 export default function Home() {
+  const router = useRouter();
+  const [roomCode, setRoomCode] = useState("");
+  const [isCreating, setIsCreating] = useState(false);
+
+  const createRoom = () => {
+    setIsCreating(true);
+    // Generate a simple 4-character code
+    const code = Math.random().toString(36).substring(2, 6).toUpperCase();
+    setTimeout(() => {
+      router.push(`/room/${code}`);
+    }, 800);
+  };
+
+  const joinRoom = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (roomCode.length >= 3) {
+      router.push(`/room/${roomCode.toUpperCase()}`);
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="flex min-h-screen flex-col items-center justify-center p-6 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 dark:from-indigo-950 dark:via-purple-950 dark:to-pink-950 text-white">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mx-auto max-w-md w-full text-center space-y-8"
+      >
+        <div className="space-y-4">
+          <h1 className="text-5xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">
+            Priority Poker
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-lg text-white/80">
+            Align your team's roadmap without the arguments.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <div className="rounded-3xl p-8 space-y-6 text-slate-900 dark:text-white bg-white/70 backdrop-blur-xl border border-white/20 shadow-xl dark:bg-black/60 dark:border-white/10">
+          <button
+            onClick={createRoom}
+            disabled={isCreating}
+            className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold text-lg hover:opacity-90 transition shadow-lg disabled:opacity-50"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            {isCreating ? "Creating Room..." : "Start New Game"}
+          </button>
+
+          <div className="relative flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-slate-200 dark:border-slate-700" />
+            </div>
+            <span className="relative bg-white dark:bg-black px-4 text-xs uppercase text-slate-500">
+              Or join existing
+            </span>
+          </div>
+
+          <form onSubmit={joinRoom} className="space-y-4">
+            <input
+              type="text"
+              placeholder="Enter Room Code"
+              value={roomCode}
+              onChange={(e) => setRoomCode(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-center text-xl font-mono uppercase tracking-widest focus:ring-2 focus:ring-indigo-500 outline-none dark:bg-slate-900 dark:border-slate-700"
+              maxLength={6}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <button
+              type="submit"
+              disabled={!roomCode}
+              className="w-full py-3 px-6 rounded-xl bg-slate-100 text-slate-600 font-semibold hover:bg-slate-200 transition disabled:opacity-50 dark:bg-slate-800 dark:text-slate-300"
+            >
+              Join Room
+            </button>
+          </form>
         </div>
-      </main>
-    </div>
+      </motion.div>
+    </main>
   );
 }
