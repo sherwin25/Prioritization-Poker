@@ -42,7 +42,7 @@ export default function RoomPage() {
   };
 
   const copyCode = () => {
-    navigator.clipboard.writeText(window.location.href);
+    if (code) navigator.clipboard.writeText(code);
   };
 
   if (!hasJoined) {
