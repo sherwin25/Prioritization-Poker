@@ -16,13 +16,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} antialiased min-h-screen bg-[#0F172A] text-slate-100 selection:bg-indigo-500/30`}>
-        {/* Animated Background Mesh */}
-        <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-purple-600/20 blur-[100px] animate-pulse" />
-          <div className="absolute top-[20%] right-[-10%] w-[30%] h-[30%] rounded-full bg-indigo-600/20 blur-[100px] animate-pulse delay-700" />
-          <div className="absolute bottom-[-10%] left-[20%] w-[30%] h-[30%] rounded-full bg-pink-600/20 blur-[100px] animate-pulse delay-1000" />
-        </div>
+      <body className={`${inter.className} antialiased min-h-screen bg-background text-foreground selection:bg-primary/20`}>
+        <div className="fixed inset-0 z-0 bg-grid pointer-events-none opacity-[0.4]" />
         <div className="relative z-10">
           {children}
         </div>
