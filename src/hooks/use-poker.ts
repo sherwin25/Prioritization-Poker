@@ -11,6 +11,7 @@ export type Player = {
 
 export type GameState = {
   isRevealed: boolean;
+  topic?: string;
 };
 
 // Generate a random ID for the current session
@@ -97,7 +98,7 @@ export function usePokerRoom(roomCode: string, myName: string) {
 
   const reveal = async () => {
     if (!channelRef.current) return;
-    const newState = { isRevealed: true };
+    const newState = { ...gameState, isRevealed: true };
     setGameState(newState);
     await channelRef.current.send({
       type: 'broadcast',
@@ -108,7 +109,7 @@ export function usePokerRoom(roomCode: string, myName: string) {
 
   const reset = async () => {
     if (!channelRef.current) return;
-    const newState = { isRevealed: false };
+    const newState = { ...gameState, isRevealed: false };
     setGameState(newState);
     await channelRef.current.send({
       type: 'broadcast',
@@ -123,6 +124,17 @@ export function usePokerRoom(roomCode: string, myName: string) {
       isSpectator: false
     });
   };
+  
+  const setTopic = async (topic: string) => {
+    if (!channelRef.current) return;
+    const newState = { ...gameState, topic, isRevealed: false };
+    setGameState(newState);
+    await channelRef.current.send({
+      type: 'broadcast',
+      event: 'game_state',
+      payload: newState
+    });
+  };
 
-  return { players, gameState, myId, vote, reveal, reset };
+  return { players, gameState, myId, vote, reveal, reset, setTopic };
 }

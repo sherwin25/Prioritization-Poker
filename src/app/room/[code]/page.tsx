@@ -9,6 +9,7 @@ import confetti from "canvas-confetti";
 import { Copy, RefreshCw, Eye, Check, Users } from "lucide-react";
 
 import { RulesModal } from "@/components/RulesModal";
+import { QuestionPicker } from "@/components/QuestionPicker";
 
 const CARDS = [1, 2, 3, 5, 8, 13, 21, "?", "☕"];
 
@@ -18,8 +19,9 @@ export default function RoomPage() {
   const [name, setName] = useState("");
   const [hasJoined, setHasJoined] = useState(false);
   const [showRules, setShowRules] = useState(false);
+  const [showQuestions, setShowQuestions] = useState(false);
   
-  const { players, gameState, myId, vote, reveal, reset } = usePokerRoom(hasJoined ? code : "", name);
+  const { players, gameState, myId, vote, reveal, reset, setTopic } = usePokerRoom(hasJoined ? code : "", name);
 
   const handleJoin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,6 +89,11 @@ export default function RoomPage() {
   return (
     <main className="min-h-screen flex flex-col bg-background">
       <RulesModal isOpen={showRules} onClose={() => setShowRules(false)} />
+      <QuestionPicker 
+        isOpen={showQuestions} 
+        onClose={() => setShowQuestions(false)} 
+        onSelect={(topic) => setTopic(topic)}
+      />
       
       {/* Header */}
       <header className="p-4 md:p-6 flex justify-between items-center z-10 border-b border-border bg-background/50 backdrop-blur-sm sticky top-0">
@@ -133,9 +140,45 @@ export default function RoomPage() {
       </header>
 
       {/* Table Area */}
-      <div className="flex-1 relative flex items-center justify-center p-8 overflow-hidden bg-grid">
+      <div className="flex-1 relative flex flex-col items-center justify-center p-8 overflow-hidden bg-grid">
         
-        <div className="relative z-10 flex flex-wrap gap-12 justify-center max-w-5xl items-center min-h-[300px]">
+        {/* Current Topic Display */}
+        <div className="z-20 mb-12 text-center space-y-4 max-w-2xl px-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/80 border border-border text-xs font-bold text-muted-foreground uppercase tracking-wider">
+            Current Task
+          </div>
+          {gameState.topic ? (
+            <motion.h2 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              key={gameState.topic}
+              className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight leading-tight"
+            >
+              {gameState.topic}
+            </motion.h2>
+          ) : (
+            <div className="space-y-2">
+               <h2 className="text-3xl md:text-4xl font-bold text-muted-foreground/30">
+                 Waiting for task...
+               </h2>
+               <button 
+                 onClick={() => setShowQuestions(true)}
+                 className="text-primary hover:underline font-semibold"
+               >
+                 Select a preset question
+               </button>
+            </div>
+          )}
+          
+          <button
+              onClick={() => setShowQuestions(true)}
+              className="inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-full bg-primary/10 text-primary font-bold text-sm hover:bg-primary/20 transition-colors"
+          >
+             Change Task
+          </button>
+        </div>
+
+        <div className="relative z-10 flex flex-wrap gap-12 justify-center max-w-5xl items-center min-h-[200px]">
           <AnimatePresence>
             {players.map((p, i) => (
               <motion.div
