@@ -6,10 +6,13 @@ import { cn } from "@/utils/cn";
 import { motion } from "framer-motion";
 import { ArrowRight, Users, Play, Radio } from "lucide-react";
 
+import { RulesModal } from "@/components/RulesModal";
+
 export default function Home() {
   const router = useRouter();
   const [roomCode, setRoomCode] = useState("");
   const [isCreating, setIsCreating] = useState(false);
+  const [showRules, setShowRules] = useState(false);
 
   const createRoom = () => {
     setIsCreating(true);
@@ -28,7 +31,16 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-6 bg-background">
+    <main className="flex min-h-screen flex-col items-center justify-center p-6 bg-background relative">
+      <RulesModal isOpen={showRules} onClose={() => setShowRules(false)} />
+      
+      <button 
+        onClick={() => setShowRules(true)}
+        className="absolute top-6 right-6 text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-secondary/50"
+      >
+        <span>How to Play?</span>
+      </button>
+
       <motion.div 
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}

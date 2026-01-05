@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Copy, RefreshCw, Eye, Check, Users } from "lucide-react";
 
+import { RulesModal } from "@/components/RulesModal";
+
 const CARDS = [1, 2, 3, 5, 8, 13, 21, "?", "☕"];
 
 export default function RoomPage() {
@@ -15,6 +17,7 @@ export default function RoomPage() {
   const code = (params?.code as string)?.toUpperCase();
   const [name, setName] = useState("");
   const [hasJoined, setHasJoined] = useState(false);
+  const [showRules, setShowRules] = useState(false);
   
   const { players, gameState, myId, vote, reveal, reset } = usePokerRoom(hasJoined ? code : "", name);
 
@@ -83,6 +86,8 @@ export default function RoomPage() {
 
   return (
     <main className="min-h-screen flex flex-col bg-background">
+      <RulesModal isOpen={showRules} onClose={() => setShowRules(false)} />
+      
       {/* Header */}
       <header className="p-4 md:p-6 flex justify-between items-center z-10 border-b border-border bg-background/50 backdrop-blur-sm sticky top-0">
         <div className="flex items-center gap-4">
@@ -93,9 +98,23 @@ export default function RoomPage() {
                 <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
               </button>
            </div>
+           
+           <button 
+             onClick={() => setShowRules(true)}
+             className="hidden md:flex ml-4 px-3 py-1.5 rounded-md bg-secondary text-xs font-semibold text-muted-foreground hover:text-foreground border border-transparent hover:border-border transition-all items-center gap-2"
+           >
+             How to Play
+           </button>
         </div>
         
         <div className="flex items-center gap-3">
+            <button 
+              onClick={() => setShowRules(true)}
+              className="md:hidden p-2 text-muted-foreground hover:text-foreground"
+            >
+               <span className="sr-only">Rules</span>
+               <div className="w-5 h-5 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">?</div>
+            </button>
             <div className="px-3 py-1.5 rounded-md bg-secondary border border-border text-sm text-foreground flex items-center gap-2">
                <Users className="w-4 h-4 text-muted-foreground"/>
                <span className="font-bold">{players.length}</span>
