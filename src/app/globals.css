@@ -25,8 +25,8 @@
 
 @layer base {
   :root {
-    /* Light Mode (Future Proofing) */
-    --background: hsl(210 40% 98%);
+    /* Light Mode (Active) - Clean White Board */
+    --background: hsl(0 0% 100%);
     --foreground: hsl(222 47% 11%);
     --card: hsl(0 0% 100%);
     --card-foreground: hsl(222 47% 11%);
@@ -48,35 +48,29 @@
   }
  
   .dark {
-    /* Dark Mode (Active) - Slate w/ Indigo Tint */
-    --background: hsl(222 47% 11%); /* Slate-950 */
+    /* Dark Mode (Disabled but kept for reference) */
+    --background: hsl(222 47% 11%);
     --foreground: hsl(210 40% 98%);
-    --card: hsl(217 33% 17%); /* Slate-900 */
+    --card: hsl(217 33% 17%);
     --card-foreground: hsl(210 40% 98%);
     --popover: hsl(222 47% 11%);
     --popover-foreground: hsl(210 40% 98%);
-    
-    --primary: hsl(217 91% 60%); /* Indigo-500 */
+    --primary: hsl(217 91% 60%);
     --primary-foreground: hsl(222 47% 11%);
-    
     --secondary: hsl(217 33% 17%);
     --secondary-foreground: hsl(210 40% 98%);
-    
     --muted: hsl(217 33% 17%);
     --muted-foreground: hsl(215 20% 65%);
-    
     --accent: hsl(217 33% 17%);
     --accent-foreground: hsl(210 40% 98%);
-    
     --destructive: hsl(0 62.8% 30.6%);
     --destructive-foreground: hsl(210 40% 98%);
-    
     --border: hsl(217 33% 17%);
     --input: hsl(217 33% 17%);
     --ring: hsl(224 76% 48%);
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
@@ -86,9 +80,9 @@
   }
 }
 
-/* Subtle Grid for depth */
+/* Subtle Grid for depth (Darkened for Light Mode) */
 .bg-grid {
   background-size: 40px 40px;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
 }

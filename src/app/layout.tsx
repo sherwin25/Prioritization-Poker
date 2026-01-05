@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body className={`${inter.className} antialiased min-h-screen bg-background text-foreground selection:bg-primary/20`}>
         <div className="fixed inset-0 z-0 bg-grid pointer-events-none opacity-[0.4]" />
         <div className="relative z-10">
